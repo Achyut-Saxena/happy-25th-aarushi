@@ -1,0 +1,6 @@
+<img src="images/photo1.jpg" alt="Memory" class="...">
+<img src="images/polaroid1.jpg" alt="Polaroid Memory">
+<video id="video-player-1" class="w-full rounded-2xl" controls>
+  <source src="videos/video1.mp4" type="video/mp4">
+  Your browser does not support video playback.
+</video>
