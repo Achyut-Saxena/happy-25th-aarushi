@@ -132,7 +132,7 @@
     <!-- 3. 25 REASONS WHY I LOVE YOU (3D FLIP CARDS) -->
     <section class="space-y-8">
       <div class="text-center space-y-2">
-        <h2 class="text-3xl md:text-4xl font-serif-title text-pink-200">25 Reasons Why you are Loved ❤️</h2>
+        <h2 class="text-3xl md:text-4xl font-serif-title text-pink-200">25 Reasons Why I Love You ❤️</h2>
         <p class="text-slate-400 text-sm">Click on any card to flip it over and read the reason.</p>
       </div>
 
@@ -327,11 +327,16 @@
 
     function extinguishCandle(index) {
       const flame = document.getElementById(`flame-${index}`);
-      if(flame && !flame.classList.contains('hidden')) {
+      if (flame && !flame.classList.contains('hidden')) {
         flame.classList.add('hidden');
         litCount--;
-        document.getElementById('candle-count').innerText = litCount;
-        if(litCount === 0) {
+        
+        const countElem = document.getElementById('candle-count');
+        if (countElem) {
+          countElem.innerText = litCount;
+        }
+
+        if (litCount === 0) {
           confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
           document.getElementById('cake-status').innerHTML = '🎉 All 25 candles blown out! May your wish come true!';
         }
@@ -340,7 +345,6 @@
 
     function resetCandles() {
       litCount = 25;
-      document.getElementById('candle-count').innerText = 25;
       document.getElementById('cake-status').innerHTML = 'Candles remaining: <span id="candle-count">25</span>/25';
       renderCandles();
     }
