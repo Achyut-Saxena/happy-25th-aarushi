@@ -85,7 +85,7 @@
           <div class="text-xs text-slate-400 uppercase tracking-wider mt-1">Candles To Blow</div>
         </div>
         <div class="glass-card p-4 rounded-2xl text-center">
-          <div class="text-3xl font-bold text-emerald-400">∞</div >
+          <div class="text-3xl font-bold text-emerald-400">∞</div>
           <div class="text-xs text-slate-400 uppercase tracking-wider mt-1">Memories Ahead</div>
         </div>
       </div>
@@ -132,7 +132,7 @@
     <!-- 3. 25 REASONS WHY I LOVE YOU (3D FLIP CARDS) -->
     <section class="space-y-8">
       <div class="text-center space-y-2">
-        <h2 class="text-3xl md:text-4xl font-serif-title text-pink-200">25 Reasons Why You are Loved! ❤️</h2>
+        <h2 class="text-3xl md:text-4xl font-serif-title text-pink-200">25 Reasons Why I Love You ❤️</h2>
         <p class="text-slate-400 text-sm">Click on any card to flip it over and read the reason.</p>
       </div>
 
@@ -149,84 +149,35 @@
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        <!-- Video items 1 to 7 -->
-        <div class="glass-card rounded-2xl overflow-hidden group hover:border-pink-500/40 transition">
-          <div class="relative bg-slate-900 aspect-video flex items-center justify-center">
-            <video class="w-full h-full object-cover" controls preload="metadata">
-              <source src="videos/video1.mp4" type="video/mp4">
-              Your browser does not support HTML video.
-            </video>
-          </div>
-          <div class="p-4"><p class="font-semibold text-sm text-pink-200">Moment #1</p></div>
-        </div>
-
-        <div class="glass-card rounded-2xl overflow-hidden group hover:border-pink-500/40 transition">
-          <div class="relative bg-slate-900 aspect-video flex items-center justify-center">
-            <video class="w-full h-full object-cover" controls preload="metadata">
-              <source src="videos/video2.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="p-4"><p class="font-semibold text-sm text-pink-200">Moment #2</p></div>
-        </div>
-
-        <div class="glass-card rounded-2xl overflow-hidden group hover:border-pink-500/40 transition">
-          <div class="relative bg-slate-900 aspect-video flex items-center justify-center">
-            <video class="w-full h-full object-cover" controls preload="metadata">
-              <source src="videos/video3.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="p-4"><p class="font-semibold text-sm text-pink-200">Moment #3</p></div>
-        </div>
-
-        <div class="glass-card rounded-2xl overflow-hidden group hover:border-pink-500/40 transition">
-          <div class="relative bg-slate-900 aspect-video flex items-center justify-center">
-            <video class="w-full h-full object-cover" controls preload="metadata">
-              <source src="videos/video4.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="p-4"><p class="font-semibold text-sm text-pink-200">Moment #4</p></div>
-        </div>
-
-        <div class="glass-card rounded-2xl overflow-hidden group hover:border-pink-500/40 transition">
-          <div class="relative bg-slate-900 aspect-video flex items-center justify-center">
-            <video class="w-full h-full object-cover" controls preload="metadata">
-              <source src="videos/video5.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="p-4"><p class="font-semibold text-sm text-pink-200">Moment #5</p></div>
-        </div>
-
-        <div class="glass-card rounded-2xl overflow-hidden group hover:border-pink-500/40 transition">
-          <div class="relative bg-slate-900 aspect-video flex items-center justify-center">
-            <video class="w-full h-full object-cover" controls preload="metadata">
-              <source src="videos/video6.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="p-4"><p class="font-semibold text-sm text-pink-200">Moment #6</p></div>
-        </div>
-
-        <div class="glass-card rounded-2xl overflow-hidden group hover:border-pink-500/40 transition">
-          <div class="relative bg-slate-900 aspect-video flex items-center justify-center">
-            <video class="w-full h-full object-cover" controls preload="metadata">
-              <source src="videos/video7.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="p-4"><p class="font-semibold text-sm text-pink-200">Moment #7</p></div>
-        </div>
+        <script>
+          for(let i=1; i<=7; i++){
+            document.write(`
+              <div class="glass-card rounded-2xl overflow-hidden group hover:border-pink-500/40 transition">
+                <div class="relative bg-slate-900 aspect-video flex items-center justify-center">
+                  <video class="w-full h-full object-cover" controls preload="metadata">
+                    <source src="videos/video${i}.mp4" type="video/mp4">
+                    Your browser does not support HTML video.
+                  </video>
+                </div>
+                <div class="p-4"><p class="font-semibold text-sm text-pink-200">Moment #${i}</p></div>
+              </div>
+            `);
+          }
+        </script>
       </div>
     </section>
 
-    <!-- 5. 10 SOLO POLAROIDS -->
+    <!-- 5. 11 SOLO POLAROIDS -->
     <section class="space-y-8">
       <div class="text-center space-y-2">
         <h2 class="text-3xl md:text-4xl font-serif-title text-pink-200">Solo Polaroids 📸</h2>
-        <p class="text-slate-400 text-sm">10 gorgeous solo captures of the birthday girl.</p>
+        <p class="text-slate-400 text-sm">11 gorgeous solo captures of the birthday girl.</p>
       </div>
 
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
-        <!-- 10 Solo photos -->
+        <!-- 11 Solo photos -->
         <script>
-          for(let i=1; i<=10; i++){
+          for(let i=1; i<=11; i++){
             const rot = (i % 2 === 0 ? 'rotate-2' : '-rotate-2');
             document.write(`
               <div onclick="openLightbox('images/solo${i}.jpeg', 'Aarushi Solo #${i}')" class="bg-slate-100 p-3 rounded shadow-xl text-slate-800 transform ${rot} hover:rotate-0 hover:scale-105 transition cursor-pointer">
@@ -241,16 +192,17 @@
       </div>
     </section>
 
-    <!-- 6. 11 FRIENDS & FAMILY GALLERY -->
+    <!-- 6. 22 FRIENDS & FAMILY GALLERY -->
     <section class="space-y-8">
       <div class="text-center space-y-2">
         <h2 class="text-3xl md:text-4xl font-serif-title text-pink-200">With Friends & Family 👨‍👩‍👧‍👦</h2>
-        <p class="text-slate-400 text-sm">Precious memories shared with loved ones.</p>
+        <p class="text-slate-400 text-sm">22 precious memories shared with loved ones.</p>
       </div>
 
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+        <!-- 22 Family/Friends photos -->
         <script>
-          for(let i=1; i<=11; i++){
+          for(let i=1; i<=22; i++){
             document.write(`
               <div onclick="openLightbox('images/family${i}.jpeg', 'Family & Friends #${i}')" class="glass-card p-2 rounded-2xl overflow-hidden hover:border-pink-500/50 transition cursor-pointer group">
                 <div class="aspect-square bg-slate-800 rounded-xl overflow-hidden">
@@ -413,7 +365,6 @@
           let average = sum / dataArray.length;
 
           if(average > 50 && litCount > 0) {
-            // Extinguish a random lit candle
             let litIndices = [];
             for(let i=0; i<25; i++) {
               const flame = document.getElementById(`flame-${i}`);
@@ -464,7 +415,6 @@
     // 4. Secret Quiz Check ("When is SOS?")
     function checkQuizAnswer() {
       const input = document.getElementById('quiz-input').value.trim().toLowerCase();
-      // Valid answers: "6th sept", "6th september", "september 6", "06/09", "6 sept"
       if(input.includes('6') && (input.includes('sept') || input.includes('9'))) {
         document.getElementById('secret-letter').classList.remove('hidden');
         document.getElementById('quiz-error').classList.add('hidden');
