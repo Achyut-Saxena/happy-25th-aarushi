@@ -1,6 +1,488 @@
-<img src="images/photo1.jpg" alt="Memory" class="...">
-<img src="images/polaroid1.jpg" alt="Polaroid Memory">
-<video id="video-player-1" class="w-full rounded-2xl" controls>
-  <source src="videos/video1.mp4" type="video/mp4">
-  Your browser does not support video playback.
-</video>
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy 25th Birthday Aarushi! ❤️</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- FontAwesome Icons & Canvas Confetti -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Outfit:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Outfit', sans-serif; }
+    .font-serif-title { font-family: 'Playfair Display', serif; }
+    .font-handwriting { font-family: 'Caveat', cursive; }
+
+    /* Glassmorphism utility */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    
+    /* 3D Card Flip styling */
+    .perspective-1000 { perspective: 1000px; }
+    .transform-style-3d { transform-style: preserve-3d; }
+    .backface-hidden { backface-visibility: hidden; }
+    .rotate-y-180 { transform: rotateY(180deg); }
+
+    /* Candle Flame Animation */
+    .flame {
+      background: radial-gradient(ellipse at bottom, #fef08a 0%, #f97316 60%, transparent 100%);
+      border-radius: 50% 50% 20% 20%;
+      box-shadow: 0 0 10px #f97316, 0 0 20px #eab308;
+      animation: flicker 0.6s infinite alternate ease-in-out;
+    }
+    @keyframes flicker {
+      0% { transform: scale(1) rotate(-1deg); opacity: 0.9; }
+      100% { transform: scale(1.15) rotate(1.5deg); opacity: 1; }
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 overflow-x-hidden">
+
+  <!-- Background Particle Canvas -->
+  <canvas id="bg-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
+  <div class="relative z-10 max-w-6xl mx-auto px-4 py-8 space-y-24">
+
+    <!-- 1. HERO HEADER SECTION -->
+    <header class="text-center pt-12 pb-8 space-y-6">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-pink-300 text-sm font-semibold tracking-wider uppercase shadow-lg border border-pink-500/20">
+        ✨ Milestone Quarter Century ✨
+      </div>
+      
+      <h1 class="text-5xl md:text-7xl font-serif-title font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-rose-200 to-amber-200 leading-tight">
+        Happy 25th Birthday,<br><span class="text-pink-400">Aarushi!</span> ❤️
+      </h1>
+      
+      <p class="text-xl md:text-2xl text-slate-300 max-w-2xl mx-auto font-light">
+        To my favorite person, <span class="text-pink-300 font-medium font-handwriting text-3xl">Alululu</span>. Here is a small space on the internet made just for you.
+      </p>
+
+      <!-- Milestone Metrics Grid -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto pt-6">
+        <div class="glass-card p-4 rounded-2xl text-center">
+          <div class="text-3xl font-bold text-pink-400">9,131</div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider mt-1">Days Beautiful</div>
+        </div>
+        <div class="glass-card p-4 rounded-2xl text-center">
+          <div class="text-3xl font-bold text-rose-400">219,144</div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider mt-1">Hours Loved</div>
+        </div>
+        <div class="glass-card p-4 rounded-2xl text-center">
+          <div class="text-3xl font-bold text-amber-300">25</div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider mt-1">Candles To Blow</div>
+        </div>
+        <div class="glass-card p-4 rounded-2xl text-center">
+          <div class="text-3xl font-bold text-emerald-400">∞</div >
+          <div class="text-xs text-slate-400 uppercase tracking-wider mt-1">Memories Ahead</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- 2. INTERACTIVE 25-CANDLE BIRTHDAY CAKE -->
+    <section class="glass-card rounded-3xl p-8 md:p-12 text-center relative overflow-hidden">
+      <div class="max-w-2xl mx-auto space-y-4">
+        <h2 class="text-3xl md:text-4xl font-serif-title text-pink-200">Make a Wish! 🎂</h2>
+        <p class="text-slate-300 text-sm md:text-base">
+          Tap each candle to blow it out, or click <strong class="text-pink-300">"Enable Mic"</strong> and physically blow into your device's microphone!
+        </p>
+        
+        <div class="flex justify-center gap-3 pt-2">
+          <button id="mic-btn" onclick="initMicrophone()" class="px-4 py-2 bg-pink-600 hover:bg-pink-500 text-white rounded-full text-sm font-semibold transition flex items-center gap-2 shadow-lg">
+            <i class="fa-solid fa-microphone"></i> Enable Mic Blow
+          </button>
+          <button onclick="resetCandles()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-full text-sm font-semibold transition">
+            Relight All
+          </button>
+        </div>
+      </div>
+
+      <!-- Cake Graphic with 25 Candles -->
+      <div class="relative w-full max-w-md mx-auto my-12 pt-16 pb-8">
+        <!-- 25 Candles Row -->
+        <div id="candles-container" class="flex flex-wrap justify-center gap-2 md:gap-3 mb-2 px-4 relative z-20">
+          <!-- 25 candles injected by JS -->
+        </div>
+
+        <!-- 3-Tier Cake -->
+        <div class="relative z-10 mx-auto">
+          <div class="w-48 h-10 bg-pink-300/30 rounded-t-xl mx-auto border-t-2 border-pink-200/50"></div>
+          <div class="w-64 h-12 bg-pink-400/30 mx-auto border-t-2 border-pink-300/50"></div>
+          <div class="w-80 h-16 bg-pink-500/30 rounded-b-2xl mx-auto border-t-2 border-pink-400/50 shadow-2xl"></div>
+        </div>
+      </div>
+
+      <p id="cake-status" class="text-pink-300 font-semibold text-lg">
+        Candles remaining: <span id="candle-count">25</span>/25
+      </p>
+    </section>
+
+    <!-- 3. 25 REASONS WHY I LOVE YOU (3D FLIP CARDS) -->
+    <section class="space-y-8">
+      <div class="text-center space-y-2">
+        <h2 class="text-3xl md:text-4xl font-serif-title text-pink-200">25 Reasons Why I Love You ❤️</h2>
+        <p class="text-slate-400 text-sm">Click on any card to flip it over and read the reason.</p>
+      </div>
+
+      <div id="reasons-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+        <!-- 25 cards generated by JS -->
+      </div>
+    </section>
+
+    <!-- 4. VIDEO HIGHLIGHT REEL (7 VIDEOS) -->
+    <section class="space-y-8">
+      <div class="text-center space-y-2">
+        <h2 class="text-3xl md:text-4xl font-serif-title text-pink-200">Video Highlights 🎬</h2>
+        <p class="text-slate-400 text-sm">7 favorite video moments captured together.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <!-- Video items 1 to 7 -->
+        <div class="glass-card rounded-2xl overflow-hidden group hover:border-pink-500/40 transition">
+          <div class="relative bg-slate-900 aspect-video flex items-center justify-center">
+            <video class="w-full h-full object-cover" controls preload="metadata">
+              <source src="videos/video1.mp4" type="video/mp4">
+              Your browser does not support HTML video.
+            </video>
+          </div>
+          <div class="p-4"><p class="font-semibold text-sm text-pink-200">Moment #1</p></div>
+        </div>
+
+        <div class="glass-card rounded-2xl overflow-hidden group hover:border-pink-500/40 transition">
+          <div class="relative bg-slate-900 aspect-video flex items-center justify-center">
+            <video class="w-full h-full object-cover" controls preload="metadata">
+              <source src="videos/video2.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="p-4"><p class="font-semibold text-sm text-pink-200">Moment #2</p></div>
+        </div>
+
+        <div class="glass-card rounded-2xl overflow-hidden group hover:border-pink-500/40 transition">
+          <div class="relative bg-slate-900 aspect-video flex items-center justify-center">
+            <video class="w-full h-full object-cover" controls preload="metadata">
+              <source src="videos/video3.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="p-4"><p class="font-semibold text-sm text-pink-200">Moment #3</p></div>
+        </div>
+
+        <div class="glass-card rounded-2xl overflow-hidden group hover:border-pink-500/40 transition">
+          <div class="relative bg-slate-900 aspect-video flex items-center justify-center">
+            <video class="w-full h-full object-cover" controls preload="metadata">
+              <source src="videos/video4.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="p-4"><p class="font-semibold text-sm text-pink-200">Moment #4</p></div>
+        </div>
+
+        <div class="glass-card rounded-2xl overflow-hidden group hover:border-pink-500/40 transition">
+          <div class="relative bg-slate-900 aspect-video flex items-center justify-center">
+            <video class="w-full h-full object-cover" controls preload="metadata">
+              <source src="videos/video5.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="p-4"><p class="font-semibold text-sm text-pink-200">Moment #5</p></div>
+        </div>
+
+        <div class="glass-card rounded-2xl overflow-hidden group hover:border-pink-500/40 transition">
+          <div class="relative bg-slate-900 aspect-video flex items-center justify-center">
+            <video class="w-full h-full object-cover" controls preload="metadata">
+              <source src="videos/video6.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="p-4"><p class="font-semibold text-sm text-pink-200">Moment #6</p></div>
+        </div>
+
+        <div class="glass-card rounded-2xl overflow-hidden group hover:border-pink-500/40 transition">
+          <div class="relative bg-slate-900 aspect-video flex items-center justify-center">
+            <video class="w-full h-full object-cover" controls preload="metadata">
+              <source src="videos/video7.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="p-4"><p class="font-semibold text-sm text-pink-200">Moment #7</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. 10 SOLO POLAROIDS -->
+    <section class="space-y-8">
+      <div class="text-center space-y-2">
+        <h2 class="text-3xl md:text-4xl font-serif-title text-pink-200">Solo Polaroids 📸</h2>
+        <p class="text-slate-400 text-sm">10 gorgeous solo captures of the birthday girl.</p>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
+        <!-- 10 Solo photos -->
+        <script>
+          for(let i=1; i<=10; i++){
+            const rot = (i % 2 === 0 ? 'rotate-2' : '-rotate-2');
+            document.write(`
+              <div onclick="openLightbox('images/solo${i}.jpg', 'Aarushi Solo #${i}')" class="bg-slate-100 p-3 rounded shadow-xl text-slate-800 transform ${rot} hover:rotate-0 hover:scale-105 transition cursor-pointer">
+                <div class="aspect-[4/5] bg-slate-300 overflow-hidden rounded-sm">
+                  <img src="images/solo${i}.jpg" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500'" class="w-full h-full object-cover" alt="Solo ${i}">
+                </div>
+                <p class="font-handwriting text-xl text-center mt-2 text-slate-700">Aarushi #${i}</p>
+              </div>
+            `);
+          }
+        </script>
+      </div>
+    </section>
+
+    <!-- 6. 11 FRIENDS & FAMILY GALLERY -->
+    <section class="space-y-8">
+      <div class="text-center space-y-2">
+        <h2 class="text-3xl md:text-4xl font-serif-title text-pink-200">With Friends & Family 👨‍👩‍👧‍👦</h2>
+        <p class="text-slate-400 text-sm">Precious memories shared with loved ones.</p>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+        <script>
+          for(let i=1; i<=11; i++){
+            document.write(`
+              <div onclick="openLightbox('images/family${i}.jpg', 'Family & Friends #${i}')" class="glass-card p-2 rounded-2xl overflow-hidden hover:border-pink-500/50 transition cursor-pointer group">
+                <div class="aspect-square bg-slate-800 rounded-xl overflow-hidden">
+                  <img src="images/family${i}.jpg" onerror="this.src='https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=500'" class="w-full h-full object-cover group-hover:scale-110 transition duration-300" alt="Family ${i}">
+                </div>
+                <p class="text-xs text-slate-400 text-center mt-2 font-medium">Memory #${i}</p>
+              </div>
+            `);
+          }
+        </script>
+      </div>
+    </section>
+
+    <!-- 7. SECRET "SOS" QUIZ LOCKBOX -->
+    <section class="glass-card rounded-3xl p-8 md:p-12 text-center max-w-2xl mx-auto space-y-6 relative border border-pink-500/30">
+      <div class="inline-block p-4 rounded-full bg-pink-500/10 text-pink-300 mb-2">
+        <i class="fa-solid fa-lock text-3xl"></i>
+      </div>
+      
+      <h2 class="text-3xl font-serif-title text-pink-200">The Secret Love Letter</h2>
+      <p class="text-slate-300 text-sm">Answer our inside secret question to unlock:</p>
+      
+      <div class="bg-slate-900/60 p-4 rounded-xl text-pink-300 font-semibold text-lg border border-pink-500/20">
+        "When is SOS?"
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
+        <input type="text" id="quiz-input" placeholder="Enter answer..." class="px-4 py-3 bg-slate-900 text-white rounded-xl border border-slate-700 focus:outline-none focus:border-pink-500 flex-1 text-center">
+        <button onclick="checkQuizAnswer()" class="px-6 py-3 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 font-semibold rounded-xl transition shadow-lg">
+          Unlock
+        </button>
+      </div>
+      
+      <p id="quiz-error" class="text-rose-400 text-sm hidden">Incorrect answer! Hint: Think of our special September date 😉</p>
+
+      <!-- Secret Unlocked Letter Box -->
+      <div id="secret-letter" class="hidden text-left bg-rose-950/40 p-6 md:p-8 rounded-2xl border border-pink-400/40 space-y-4 animate-fade-in">
+        <h3 class="text-2xl font-serif-title text-pink-200">Dearest Aarushi (Alululu),</h3>
+        <p class="text-slate-200 leading-relaxed font-light">
+          Happy 25th Birthday! Turning a quarter-century is such a beautiful milestone, and I couldn't be happier or prouder to stand beside you as you celebrate it.
+        </p>
+        <p class="text-slate-200 leading-relaxed font-light">
+          You bring so much light, warmth, and laughter into my life every single day. Thank you for being my anchor, my favorite smile, and my best friend. Here's to making 25 the most adventurous, joy-filled, and unforgettable year yet!
+        </p>
+        <p class="text-pink-300 font-serif-title text-xl pt-2">Forever & Always ❤️</p>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="text-center text-slate-500 text-xs pb-12">
+      Crafted with love for Aarushi's 25th Birthday ✨
+    </footer>
+
+  </div>
+
+  <!-- LIGHTBOX MODAL -->
+  <div id="lightbox" class="fixed inset-0 bg-black/90 z-50 hidden flex items-center justify-center p-4" onclick="closeLightbox()">
+    <div class="max-w-4xl w-full text-center space-y-4" onclick="event.stopPropagation()">
+      <img id="lightbox-img" src="" class="max-h-[80vh] mx-auto rounded-xl shadow-2xl object-contain">
+      <p id="lightbox-caption" class="text-pink-200 text-lg font-medium"></p>
+      <button onclick="closeLightbox()" class="px-4 py-2 bg-slate-800 text-slate-300 rounded-full text-sm">Close</button>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // 1. Particle Canvas Background
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    for(let i=0; i<40; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 3 + 1,
+        dy: Math.random() * -0.5 - 0.2,
+        dx: Math.random() * 0.4 - 0.2,
+        opacity: Math.random() * 0.5 + 0.2
+      });
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(244, 114, 182, ${p.opacity})`;
+        ctx.fill();
+        p.y += p.dy;
+        p.x += p.dx;
+        if(p.y < 0) p.y = canvas.height;
+        if(p.x < 0 || p.x > canvas.width) p.dx *= -1;
+      });
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    // 2. 25 Candles & Blow Logic
+    const candlesContainer = document.getElementById('candles-container');
+    let litCount = 25;
+
+    function renderCandles() {
+      candlesContainer.innerHTML = '';
+      for(let i=0; i<25; i++) {
+        candlesContainer.innerHTML += `
+          <div onclick="extinguishCandle(${i})" id="candle-${i}" class="flex flex-col items-center cursor-pointer group">
+            <div id="flame-${i}" class="w-3 h-5 flame mb-1"></div>
+            <div class="w-2 h-8 bg-gradient-to-b from-pink-200 to-pink-400 rounded-t-sm shadow"></div>
+          </div>
+        `;
+      }
+    }
+    renderCandles();
+
+    function extinguishCandle(index) {
+      const flame = document.getElementById(`flame-${index}`);
+      if(flame && !flame.classList.contains('hidden')) {
+        flame.classList.add('hidden');
+        litCount--;
+        document.getElementById('candle-count').innerText = litCount;
+        if(litCount === 0) {
+          confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
+          document.getElementById('cake-status').innerHTML = '🎉 All 25 candles blown out! May your wish come true!';
+        }
+      }
+    }
+
+    function resetCandles() {
+      litCount = 25;
+      document.getElementById('candle-count').innerText = 25;
+      document.getElementById('cake-status').innerHTML = 'Candles remaining: <span id="candle-count">25</span>/25';
+      renderCandles();
+    }
+
+    // Web Audio Mic Detection
+    async function initMicrophone() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const analyser = audioCtx.createAnalyser();
+        const mic = audioCtx.createMediaStreamSource(stream);
+        mic.connect(analyser);
+        analyser.fftSize = 256;
+        const dataArray = new Uint8Array(analyser.frequencyBinCount);
+
+        document.getElementById('mic-btn').innerText = '🎙️ Mic Active - Blow Now!';
+
+        function detectBlow() {
+          analyser.getByteFrequencyData(dataArray);
+          let sum = 0;
+          for(let i=0; i<dataArray.length; i++) sum += dataArray[i];
+          let average = sum / dataArray.length;
+
+          if(average > 50 && litCount > 0) {
+            // Extinguish a random lit candle
+            let litIndices = [];
+            for(let i=0; i<25; i++) {
+              const flame = document.getElementById(`flame-${i}`);
+              if(flame && !flame.classList.contains('hidden')) litIndices.push(i);
+            }
+            if(litIndices.length > 0) {
+              const randomLit = litIndices[Math.floor(Math.random() * litIndices.length)];
+              extinguishCandle(randomLit);
+            }
+          }
+          requestAnimationFrame(detectBlow);
+        }
+        detectBlow();
+      } catch(e) {
+        alert('Microphone access denied or not supported.');
+      }
+    }
+
+    // 3. 25 Reasons Grid Generation
+    const reasonsData = [
+      "Your infectious smile", "Your warm bear hugs", "How cute you are when laughing", "Your kind heart",
+      "Our endless late-night chats", "Your unique sense of style", "How you care for your loved ones",
+      "Your witty banter", "Your determination and grit", "The way your eyes light up", "Our coffee & food dates",
+      "Your comforting presence", "How silly we can be together", "Your unconditional support",
+      "The nickname Alululu", "How passionate you are", "Your loving nature", "Every trip we take together",
+      "Your cute little habits", "Your sweet voice", "How you always listen", "Your loyalty",
+      "How home feels like wherever you are", "Your incredible strength", "Simply because you are Aarushi ❤️"
+    ];
+
+    const reasonsGrid = document.getElementById('reasons-grid');
+    reasonsData.forEach((reason, idx) => {
+      reasonsGrid.innerHTML += `
+        <div onclick="this.querySelector('.card-inner').classList.toggle('rotate-y-180')" class="perspective-1000 h-28 cursor-pointer">
+          <div class="card-inner relative w-full h-full transform-style-3d transition-transform duration-500 rounded-2xl">
+            <!-- Front -->
+            <div class="absolute inset-0 backface-hidden glass-card rounded-2xl flex items-center justify-center border border-pink-500/20 text-pink-300 font-bold text-lg">
+              #${idx+1}
+            </div>
+            <!-- Back -->
+            <div class="absolute inset-0 backface-hidden rotate-y-180 bg-gradient-to-br from-pink-600 to-rose-700 rounded-2xl p-3 flex items-center justify-center text-center text-xs text-white font-medium shadow-lg">
+              ${reason}
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    // 4. Secret Quiz Check ("When is SOS?")
+    function checkQuizAnswer() {
+      const input = document.getElementById('quiz-input').value.trim().toLowerCase();
+      // Valid answers: "6th sept", "6th september", "september 6", "06/09", "6 sept"
+      if(input.includes('6') && (input.includes('sept') || input.includes('9'))) {
+        document.getElementById('secret-letter').classList.remove('hidden');
+        document.getElementById('quiz-error').classList.add('hidden');
+        confetti({ particleCount: 100, spread: 70 });
+      } else {
+        document.getElementById('quiz-error').classList.remove('hidden');
+      }
+    }
+
+    // 5. Lightbox Modal
+    function openLightbox(src, caption) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox-caption').innerText = caption;
+      document.getElementById('lightbox').classList.remove('hidden');
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>
